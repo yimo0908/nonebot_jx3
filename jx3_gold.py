@@ -6,7 +6,7 @@ import json
 @on_command('金价', only_to_me=False)
 async def jx3_gold(session: CommandSession):
     user = session.event.user_id
-    # 从会话状态（session.state）中获取城市名称（city），如果当前不存在，则询问用户
+    # 从会话状态（session.state）中获取服务器名称（server），如果当前不存在，则询问用户
     server = session.get('server', prompt='你想查询哪个服务器的金价呢？')
     gold_report = await get_gold_of_server(server)
     # 向用户发送金价
