@@ -8,7 +8,7 @@ async def jx3_sand(session: CommandSession):
     user = session.event.user_id
     server = session.get('server', prompt='你想查询哪个服务器的沙盘呢？')
     report = await get_sand_of_server(server)
-    await session.send(f'[CQ:at,qq={user}]' + f'[CQ:image,file={report}]')
+    await session.send(f'[CQ:at,qq={user}]' + report)
 
 
 # 命令解析器
@@ -37,4 +37,4 @@ async def get_sand_of_server(server):
     if dictionary['code'] == 0:
         return '消息处理失败，请检查输入的服务器名称是否正确！'
     image_url = dictionary["data"]["url"]
-    return image_url
+    return f'[CQ:image,file={image_url}]'
