@@ -38,8 +38,8 @@ async def _(session: CommandSession):
 async def get_gold_of_server(server: str) -> str:
     fwq = server
     api = f'https://jx3api.com/next/gold.php?token=jx3zhenhaowan&server={fwq}'
-    with httpx.AsyncClient() as sess:
-        res = sess.get(api)
+    async with httpx.AsyncClient() as sess:
+        res = await sess.get(api)
     dictionary = res.json()
     if dictionary['code'] == 0:
         return '消息处理失败，请检查输入的服务器名称是否正确！'
