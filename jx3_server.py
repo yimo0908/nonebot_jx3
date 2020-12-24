@@ -6,7 +6,7 @@ import json
 @on_command('开服', only_to_me=False)
 async def jx3_server(session):
     user = session.event.user_id
-    server = session.get('server', prompt='你想查询哪个服务器的金价呢？')
+    server = session.get('server', prompt='你想查询哪个服务器的状态呢？')
     report = await check_server(server, user)
     # 向用户发送金价
     await session.send(report)
