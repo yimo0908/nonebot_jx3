@@ -8,7 +8,7 @@ async def jx3_sand(session: CommandSession):
     user = session.event.user_id
     server = session.get('server', prompt='你想查询哪个服务器的沙盘呢？')
     report = await get_sand_of_server(server)
-    await session.send(f'[CQ:at,qq={user}]' + report)
+    await session.send(f'[CQ:at,qq={user}]' + "\n" + report)
 
 
 # 命令解析器
