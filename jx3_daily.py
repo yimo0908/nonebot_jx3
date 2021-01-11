@@ -14,6 +14,7 @@ async def jx3_daily(session):
             msg = ''
             for key in dictionary:
                 msg += "%s: %s\n" % (key, dictionary[key])
+            msg = msg[:-1]
             # print(msg)
             await session.send(f'[CQ:at,qq={user}]' + "今日日常：\n" + msg)
         except Exception as e:
