@@ -27,7 +27,7 @@ async def _(session: CommandSession):
 
 
 async def get_sand_of_server(server):
-    api = 'https://jx3api.com/api/sand.php?token=jx3zhenhaowan&server={}'.format(server)
+    api = 'https://www.nonebot.cn/next/sand.php?token=153166341&server={}'.format(server)
     async with httpx.AsyncClient() as sess:
         try:
             res = await sess.get(api)
