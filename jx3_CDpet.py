@@ -58,4 +58,4 @@ root = os.getcwd()
 
 @on_command('蹲宠', only_to_me=False)
 async def jx3_CDpet(session):
-    await session.send(f"[CQ:image,file=file:///{root}//dunchong.jpg,cache=0]")
+    await session.send(f"[CQ:image,file=file:///{root}//dunchong.jpg]")
