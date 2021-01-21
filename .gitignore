@@ -1,4 +1,6 @@
 .vscode
+.venv
+.idea
 test.py
 __pycache__/
 *.py[cod]
