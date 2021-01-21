@@ -14,7 +14,7 @@ def get_msg(what):
     res = httpx.get(api)
     data = json.loads(res.content)
     dictionary = data["data"]["data"]
-    for i,subject in enumerate(dictionary):
+    for i, subject in enumerate(dictionary):
         one_subject = "%s  上个CD：%s" % (
             subject["serendipity"], subject["date_str"])
     return one_subject
@@ -42,20 +42,19 @@ sendmsg2 = ""
 for i in who2:
     sendmsg2 += get_msg(i) + "\n"
 
-msg = title + sendmsg1 + sendmsg2 + time
-bk_img = cv2.imread("hoshino/modules/nonebot_jx3/bk.png")
-#设置需要显示的字体
-fontpath = "hoshino/modules/nonebot_jx3/font.ttc"
-font = ImageFont.truetype(fontpath, 32)
-img_pil = Image.fromarray(bk_img)
-draw = ImageDraw.Draw(img_pil)
-#绘制文字信息
-draw.text((10, 10), msg, font=font, fill=(0, 0, 0))
-bk_img = np.array(img_pil)
-cv2.imwrite("dunchong.jpg", bk_img)
-
 root = os.getcwd()
 
 @on_command('蹲宠', only_to_me=False)
 async def jx3_CDpet(session):
+    msg = title + sendmsg1 + sendmsg2 + time
+    bk_img = cv2.imread("bk.png")
+    # 设置需要显示的字体
+    fontpath = "font.ttc"
+    font = ImageFont.truetype(fontpath, 32)
+    img_pil = Image.fromarray(bk_img)
+    draw = ImageDraw.Draw(img_pil)
+    # 绘制文字信息
+    draw.text((10, 10), msg, font=font, fill=(0, 0, 0))
+    bk_img = np.array(img_pil)
+    cv2.imwrite("dunchong.jpg", bk_img)
     await session.send(f"[CQ:image,file=file:///{root}//dunchong.jpg]")
