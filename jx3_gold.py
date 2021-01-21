@@ -37,7 +37,7 @@ async def _(session: CommandSession):
 
 async def get_gold_of_server(server: str) -> str:
     fwq = server
-    api = f'https://jx3api.com/api/gold.php?token=jx3zhenhaowan&server={fwq}'
+    api = f'https://jx3api.com/api/gold.php?token=153166341&server={fwq}'
     async with httpx.AsyncClient() as sess:
         res = await sess.get(api)
     dictionary = res.json()
