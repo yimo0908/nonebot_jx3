@@ -40,8 +40,8 @@ async def jx3_CDpet(session):
     sendmsg2 = ""
     for name in who2:
         sendmsg2 += get_pet_time(name) + "\n"
-
-    msg = title + sendmsg1 + sendmsg2 + time
+    end = "\n数据来源：茗伊插件集"
+    msg = title + sendmsg1 + sendmsg2 + time + end
     img = Image.new('RGB', (700, 950), (255, 255, 255))
     # 设置需要显示的字体
     font_path = "font.ttc"
