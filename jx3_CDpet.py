@@ -18,7 +18,7 @@ def get_pet_time(name):
         _time = datetime.datetime.now() - _time
         mm, ss = divmod(_time.seconds, 60)
         hh, mm = divmod(mm, 60)
-        s = "%d小时:%02d分:%02d秒" % (hh, mm, ss)
+        s = "%dh %02dm %02ds" % (hh, mm, ss)
         if _time.days:
             def plural(n):
                 return n, abs(n) != 1 and "s" or ""
@@ -28,7 +28,7 @@ def get_pet_time(name):
 
 
 @on_command('蹲宠', only_to_me=False)
-def jx3_CDpet(session):
+async def jx3_CDpet(session):
     who1 = ["哈皮", "嘟嘟", "小灰", "小锦", "白鹅", "稻稻", "蟹仔", "蟹仕", "蟹兵", "蟹卒",
             "蟹士", "蟹将", "蟹帅", "蟹炮", "蟹相", "蟹砲", "蟹象", "阿里", "阿飞", "静静"]
     who2 = ["大头鹅", "蟹车·红", "蟹车·蓝", "蟹马·红", "蟹马·蓝"]
