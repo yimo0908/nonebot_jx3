@@ -33,7 +33,7 @@ async def check_server(server, user):
     if dictionary['code'] == 0:
         return '消息处理失败，请检查输入的服务器名称是否正确！'
     if dictionary["data"]["status"] == 1:
-        msg = f'[CQ:at,qq={user}]' + dictionary["data"]["server"] + "已开服"
+        msg = f'[CQ:at,qq={user}]' + " " + dictionary["data"]["server"] + "已开服"
     else:
-        msg = f'[CQ:at,qq={user}]' + dictionary["data"]["server"] + "未开服"
+        msg = f'[CQ:at,qq={user}]' + " " + dictionary["data"]["server"] + "未开服"
     return msg

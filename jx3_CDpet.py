@@ -13,8 +13,9 @@ def get_pet_time(name):
     res = httpx.get(api)
     data = json.loads(res.content)
     dictionary = data["data"]["data"]
-    for i, subject in enumerate(dictionary):
-        _time = datetime.datetime.strptime(subject["date_str"], '%Y-%m-%d %H:%M:%S')
+    for _, subject in enumerate(dictionary):
+        _time = datetime.datetime.strptime(
+            subject["date_str"], '%Y-%m-%d %H:%M:%S')
         _time = datetime.datetime.now() - _time
         mm, ss = divmod(_time.seconds, 60)
         hh, mm = divmod(mm, 60)
@@ -29,19 +30,15 @@ def get_pet_time(name):
 
 @on_command('蹲宠', only_to_me=False)
 async def jx3_CDpet(session):
-    who1 = ["哈皮", "嘟嘟", "小灰", "小锦", "白鹅", "稻稻", "蟹仔", "蟹仕", "蟹兵", "蟹卒",
-            "蟹士", "蟹将", "蟹帅", "蟹炮", "蟹相", "蟹砲", "蟹象", "阿里", "阿飞", "静静"]
-    who2 = ["大头鹅", "蟹车·红", "蟹车·蓝", "蟹马·红", "蟹马·蓝"]
-    time = "\n统计时间：" + strftime("%Y-%m-%d %H:%M:%S", localtime())
+    who = ["稻稻", "蟹仔", "蟹兵", "蟹卒", "蟹将", "蟹帅", "小灰", "小锦", "白鹅", "蟹相", "蟹象", "阿里", "阿飞",
+           "蟹仕", "蟹士", "蟹炮", "蟹砲", "哈皮", "嘟嘟", "静静", "大头鹅", "蟹车·红", "蟹车·蓝", "蟹马·红", "蟹马·蓝"]
     title = "绝代天骄的蹲宠CD如下：\n"
-    sendmsg1 = ""
-    for name in who1:
-        sendmsg1 += get_pet_time(name) + "\n"
-    sendmsg2 = ""
-    for name in who2:
-        sendmsg2 += get_pet_time(name) + "\n"
-    end = "\n数据来源：茗伊插件集"
-    msg = title + sendmsg1 + sendmsg2 + time + end
+    end = "\n统计时间：" + strftime("%Y-%m-%d %H:%M:%S",
+                               localtime()) + "\n数据来源：茗伊插件集"
+    sendmsg = ""
+    for name in who:
+        sendmsg += get_pet_time(name) + "\n"
+    msg = title + sendmsg + end
     img = Image.new('RGB', (700, 950), (255, 255, 255))
     # 设置需要显示的字体
     font_path = "font.ttc"
@@ -52,8 +49,3 @@ async def jx3_CDpet(session):
     img.save("dunchong.jpg", 'jpeg')
     root = os.getcwd()
     await session.send(f"[CQ:image,file=file:///{root}\\dunchong.jpg]")
-
-
-
-if __name__ == '__main__':
-    jx3_CDpet()
