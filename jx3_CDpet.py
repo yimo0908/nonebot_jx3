@@ -34,7 +34,7 @@ async def jx3_CDpet(session):
            "蟹仕", "蟹士", "蟹炮", "蟹砲", "哈皮", "嘟嘟", "静静", "大头鹅", "蟹车·红", "蟹车·蓝", "蟹马·红", "蟹马·蓝"]
     title = "绝代天骄的蹲宠CD如下：\n"
     end = "\n统计时间：" + strftime("%Y-%m-%d %H:%M:%S",
-                               localtime()) + "\n数据来源：茗伊插件集"
+                               localtime()) + "\n数据来源：茗伊插件集\nhttps://j3cx.com/serendipity"
     sendmsg = ""
     for name in who:
         sendmsg += get_pet_time(name) + "\n"
