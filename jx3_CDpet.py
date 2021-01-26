@@ -23,8 +23,8 @@ def get_pet_time(name):
         if _time.days:
             def plural(n):
                 return n, abs(n) != 1 and "s" or ""
-            s = ("%d 天%s, " % plural(_time.days)) + s
-        one_subject = "%s  上个CD：%s前" % (subject["serendipity"], s)
+            s = ("%d d%s  " % plural(_time.days)) + s
+        one_subject = "%s              上个CD：%s前" % (subject["serendipity"], s)
     return one_subject
 
 
@@ -39,7 +39,7 @@ async def jx3_CDpet(session):
     for name in who:
         sendmsg += get_pet_time(name) + "\n"
     msg = title + sendmsg + end
-    img = Image.new('RGB', (700, 950), (255, 255, 255))
+    img = Image.new('RGB', (700, 1100), (255, 255, 255))
     # 设置需要显示的字体
     font_path = "font.ttc"
     font = ImageFont.truetype(font_path, 32)
