@@ -29,7 +29,7 @@ def get_pet_time(name):
 
 
 @on_command('蹲宠', only_to_me=False)
-async def jx3_CDpet(session):
+async def jx3_cdpet(session):
     who = ["稻稻", "蟹仔", "蟹兵", "蟹卒", "蟹将", "蟹帅", "小灰", "小锦", "白鹅", "蟹相", "蟹象", "阿里", "阿飞",
            "蟹仕", "蟹士", "蟹炮", "蟹砲", "哈皮", "嘟嘟", "静静", "大头鹅", "蟹车·红", "蟹车·蓝", "蟹马·红", "蟹马·蓝"]
     title = "绝代天骄的蹲宠CD如下：\n"

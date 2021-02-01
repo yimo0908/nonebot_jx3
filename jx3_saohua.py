@@ -1,6 +1,5 @@
 from nonebot import on_command
 import httpx
-import json
 
 
 @on_command('骚话', only_to_me=False)
