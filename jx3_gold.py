@@ -1,6 +1,5 @@
 from nonebot import on_command, CommandSession
 import httpx
-import json
 
 
 @on_command('金价', only_to_me=False)
@@ -36,8 +35,7 @@ async def _(session: CommandSession):
 
 
 async def get_gold_of_server(server: str) -> str:
-    fwq = server
-    api = f'https://jx3api.com/api/gold.php?token=153166341&server={fwq}'
+    api = f'https://jx3api.com/api/gold.php?token=153166341&server={server}'
     async with httpx.AsyncClient() as sess:
         res = await sess.get(api)
     dictionary = res.json()
