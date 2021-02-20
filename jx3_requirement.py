@@ -24,7 +24,7 @@ async def _(session: CommandSession):
 
 
 async def check_requirement(name):
-    api = f'https://jx3api.com/api/server.php?token=153166341&server={name}'
+    api = f'https://jx3api.com/api/requirement.php?token=153166341&name={name}'
     async with httpx.AsyncClient() as sess:
         res = await sess.get(api)
     data = res.json()
