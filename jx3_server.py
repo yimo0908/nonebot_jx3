@@ -26,7 +26,7 @@ async def _(session: CommandSession):
 
 
 async def check_server(server, user):
-    api = f'https://jx3api.com/api/server.php?token=153166341&server={server}'
+    api = f'https://nico.nicemoe.cn/app/getServer?server={server}'
     async with httpx.AsyncClient() as sess:
         res = await sess.get(api)
     dictionary = res.json()

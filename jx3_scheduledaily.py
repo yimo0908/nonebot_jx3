@@ -9,11 +9,10 @@ async def _():
     api = f'https://jx3api.com/api/daily.php?token=153166341&server=绝代天骄'
     try:
         res = httpx.get(api)
-        dictionary = res.json()
-        msg = ''
-        for key in dictionary:
-            msg += "%s: %s\n" % (key, dictionary[key])
-        msg = msg[:-1]
+        dictionary = res.json()['data']
+        msg = ("今天是{Date}，周{Week}\n大战：{DayWar}\n战场：{DayBattle}\n驰援：{DayCommon}\n周常公共：{WeekCommon}\n周常小队：{WeekFive}\n周常团队：{WeekTeam}".format(**dictionary))
+        if "DayDraw" in dictionary.keys():
+            msg += ("\n美人图：{DayDraw}".format(**dictionary))
         await bot.send_group_msg(group_id=1003245549, message=f'今日日常：\n{msg}')
     except CQHttpError:
         pass

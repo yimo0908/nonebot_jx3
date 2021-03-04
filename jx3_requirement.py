@@ -24,12 +24,12 @@ async def _(session: CommandSession):
 
 
 async def check_requirement(name):
-    api = f'https://jx3api.com/api/requirement.php?token=153166341&name={name}'
+    api = f'https://nico.nicemoe.cn/app/getMethod?name={name}'
     async with httpx.AsyncClient() as sess:
         res = await sess.get(api)
-    data = res.json()
+    data = res.json()['data']
     if data == {'请求错误': '参数错误！'}:
         return '消息处理失败，请检查输入的奇遇名称是否正确！'
     else:
-        msg = ("奇遇名称：{奇遇名称}\n触发方式：{触发方式}\n奇遇前置：{满足条件}\n加分项目：{其他可能}\n奇遇奖励：{物品奖励}".format(**data))
+        msg = ("奇遇名称：{name}\n触发方式：{method}\n奇遇前置：{need}\n加分项目：{other}\n奇遇奖励：{reward}".format(**data))
     return msg

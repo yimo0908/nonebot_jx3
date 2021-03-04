@@ -35,19 +35,11 @@ async def _(session: CommandSession):
 
 
 async def get_gold_of_server(server: str) -> str:
-    api = f'https://jx3api.com/api/gold.php?token=153166341&server={server}'
+    api = f'https://nico.nicemoe.cn/app/getGold?server={server}'
     async with httpx.AsyncClient() as sess:
         res = await sess.get(api)
-    dictionary = res.json()
+    dictionary = res.json()["data"]
     if dictionary['code'] == 0:
         return '消息处理失败，请检查输入的服务器名称是否正确！'
-    qufu = dictionary["data"]["server"]
-    wbl = dictionary["data"]["wanbaolou"]
-    ym = dictionary["data"]["youmu"]
-    uu = dictionary["data"]["uu898"]
-    dd = dictionary["data"]["dd373"]
-    wyqs = dictionary["data"]["5173"]
-    qbby = dictionary["data"]["7881"]
-    send_msg = qufu + "的金价：\n万宝楼：" + wbl + "\n游募：" + ym + "\nuu898：" + uu + "\ndd373：" + dd + "\n5173：" + \
-               wyqs + "\n7881：" + qbby
+    send_msg =("{server}的金价：\n万宝楼：{wanbaolou}\n游募：{youmu}\nuu898：{uu898}\ndd373：{dd373}\n5173：{5173}\n7881：{7781}".format(**dictionary))
     return send_msg
