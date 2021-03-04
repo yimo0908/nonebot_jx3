@@ -42,5 +42,6 @@ async def get_gold_of_server(server: str) -> str:
     if dictionary['code'] == 400:
         return '消息处理失败，请检查输入的服务器名称是否正确！'
     else:
-        send_msg =("{server}的金价：\n万宝楼：{wanbaolou}\n游募：{youmu}\nuu898：{uu898}\ndd373：{dd373}\n5173：{5173}\n7881：{7881}".format(**dictionary["data"]))
+        d = dictionary["data"]
+        msg ="%s的金价：\n万宝楼：%s\n游募：%s\nuu898：%s\ndd373：%s\n5173：%s\n7881：%s" % (d['server'], d['wanbaolou'], d['youmu'], d['uu898'], d['dd373'], d['5173'], d['7881'])
     return send_msg
