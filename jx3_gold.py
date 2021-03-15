@@ -35,7 +35,7 @@ async def _(session: CommandSession):
 
 
 async def get_gold_of_server(server: str) -> str:
-    api = f'https://nico.nicemoe.cn/app/getGold?server={server}'
+    api = f'https://jx3api.com/app/getGold?server={server}'
     async with httpx.AsyncClient() as sess:
         res = await sess.get(api)
     dictionary = res.json()

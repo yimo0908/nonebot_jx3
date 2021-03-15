@@ -24,7 +24,7 @@ async def _(session: CommandSession):
 
 
 async def check_requirement(name):
-    api = f'https://nico.nicemoe.cn/app/getMethod?name={name}'
+    api = f'https://jx3api.com/app/getMethod?name={name}'
     async with httpx.AsyncClient() as sess:
         res = await sess.get(api)
     data = res.json()

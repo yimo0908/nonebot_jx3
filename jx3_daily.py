@@ -6,7 +6,7 @@ import httpx
 async def jx3_daily(session):
     user = session.event.user_id
     fwq = "绝代天骄"
-    api = f'https://nico.nicemoe.cn/app/getDaily?server={fwq}'
+    api = f'https://jx3api.com/app/getDaily?server={fwq}'
     async with httpx.AsyncClient() as s:
         try:
             res = await s.get(api)
