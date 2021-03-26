@@ -3,7 +3,7 @@ import nonebot
 from aiocqhttp.exceptions import Error as CQHttpError
 
 
-@nonebot.scheduler.scheduled_job('cron', hour='8', misfire_grace_time=2)
+@nonebot.scheduler.scheduled_job('cron', hour='8')
 async def _():
     bot = nonebot.get_bot()
     api = f'https://jx3api.com/app/getDaily?server=绝代天骄'

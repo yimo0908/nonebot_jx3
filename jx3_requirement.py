@@ -19,7 +19,7 @@ async def _(session: CommandSession):
             session.state['name'] = stripped_arg
         return
     if not stripped_arg:
-        session.pause('要查询服务器名称不能为空呢，请重新输入')
+        session.pause('要查询奇遇名称不能为空呢，请重新输入')
     session.state[session.current_key] = stripped_arg
 
 
