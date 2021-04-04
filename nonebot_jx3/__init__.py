@@ -6,8 +6,9 @@ from .jx3_gold import get_gold_of_server
 from .jx3_requirement import check_requirement
 from .jx3_sand import get_sand_of_server
 from .jx3_saohua import get_saohua
-from .jx3_scheduledaily import scheduled_daily_report
 from .jx3_server import check_server
+
+group_list = [1003245549]
 
 
 @on_command('条件', only_to_me=False)
@@ -118,5 +119,20 @@ async def jx3_cdpet(session):
 @scheduler.scheduled_job('cron', hour='8')
 async def jx3_scheduleddaily():
     bot = get_bot()
-    msg = await scheduled_daily_report()
-    await bot.send_group_msg(group_id=1003245549, message=f'今日日常：\n{msg}')
+    msg = await get_daily_report()
+    for group_num in group_list:
+        await bot.send_group_msg(group_id=group_num, message=f'今日日常：\n{msg}')
+
+
+@scheduler.scheduled_job('cron', day_of_week='sat', hour='20')
+async def exam_begin():
+    bot = get_bot()
+    for group_num in group_list:
+        await bot.send_group_msg(group_id=group_num, message="科举开始了，记得科举哦\n科举查题器：https://j3cx.com/exam")
+
+
+@scheduler.scheduled_job('cron', day_of_week='sun', hour='23', minute='30')
+async def exam_end():
+    bot = get_bot()
+    for group_num in group_list:
+        await bot.send_group_msg(group_id=group_num, message="科举还有半个小时结束，记得科举哦\n科举查题器：https://j3cx.com/exam")
