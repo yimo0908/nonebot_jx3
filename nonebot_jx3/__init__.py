@@ -107,7 +107,7 @@ async def jx3_sanhua(session):
 async def jx3_daily(session):
     user = session.event.user_id
     daily_report = await get_daily_report()
-    await session.send(f'[CQ:at,qq={user}]' + "\n今日日常：\n" + daily_report)
+    await session.send(f'[CQ:at,qq={user}]' + daily_report)
 
 
 @on_command('蹲宠', only_to_me=False)

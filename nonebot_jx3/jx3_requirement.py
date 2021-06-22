@@ -2,7 +2,7 @@ import httpx
 
 
 async def check_requirement(name):
-    api = f'https://jx3api.com/app/getMethod?name={name}'
+    api = f'https://jx3api.com/app/method?name={name}'
     async with httpx.AsyncClient() as sess:
         res = await sess.get(api)
     data = res.json()

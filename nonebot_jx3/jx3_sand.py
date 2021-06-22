@@ -2,7 +2,7 @@ import httpx
 
 
 async def get_sand_of_server(server):
-    api = 'https://jx3api.com/app/getSand?server={}'.format(server)
+    api = 'https://jx3api.com/app/sand?server={}'.format(server)
     async with httpx.AsyncClient() as sess:
         try:
             res = await sess.get(api)
