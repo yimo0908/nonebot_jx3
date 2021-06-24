@@ -21,7 +21,6 @@ async def jx3_requirement(session):
 @jx3_requirement.args_parser
 async def _(session: CommandSession):
     stripped_arg = session.current_arg_text.strip()
-
     if session.is_first_run:
         if stripped_arg:
             session.state['name'] = stripped_arg
@@ -42,12 +41,10 @@ async def jx3_gold(session: CommandSession):
 @jx3_gold.args_parser
 async def _(session: CommandSession):
     stripped_arg = session.current_arg_text.strip()
-
     if session.is_first_run:
         if stripped_arg:
             session.state['server'] = stripped_arg
         return
-
     if not stripped_arg:
         session.pause('要查询服务器名称不能为空呢，请重新输入')
     session.state[session.current_key] = stripped_arg
@@ -64,12 +61,10 @@ async def jx3_sand(session: CommandSession):
 @jx3_sand.args_parser
 async def _(session: CommandSession):
     stripped_arg = session.current_arg_text.strip()
-
     if session.is_first_run:
         if stripped_arg:
             session.state['server'] = stripped_arg
         return
-
     if not stripped_arg:
         session.pause('要查询服务器名称不能为空呢，请重新输入')
     session.state[session.current_key] = stripped_arg
@@ -79,15 +74,13 @@ async def _(session: CommandSession):
 async def jx3_server(session):
     user = session.event.user_id
     server = session.get('server', prompt='你想查询哪个服务器的状态呢？')
-    report = await check_server(server, user)
-    await session.send(report)
+    report = await check_server(server)
+    await session.send(f'[CQ:at,qq={user}]' + "\n" + report)
 
 
-# 命令解析器
 @jx3_server.args_parser
 async def _(session: CommandSession):
     stripped_arg = session.current_arg_text.strip()
-
     if session.is_first_run:
         if stripped_arg:
             session.state['server'] = stripped_arg

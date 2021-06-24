@@ -15,4 +15,4 @@ async def get_daily_report():
             return "\n今日日常：\n" + msg
         except Exception as e:
             msg = str(e)
-            return "\n消息处理失败\n" + msg
+            return "消息处理失败" + msg

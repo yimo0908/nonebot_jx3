@@ -11,6 +11,7 @@ def get_pet_time(name):
     res = httpx.get(api)
     data = res.json()
     dictionary = data["data"]["data"]
+    one_subject = ""
     for _, subject in enumerate(dictionary):
         _time = datetime.datetime.strptime(
             subject["date_str"], '%Y-%m-%d %H:%M:%S')
