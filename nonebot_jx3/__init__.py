@@ -8,9 +8,11 @@ from .jx3_sand import get_sand_of_server
 from .jx3_saohua import get_saohua
 from .jx3_server import check_server
 
+# 定时任务的群列表
 group_list = [1003245549]
 
 
+# 奇遇前置条件
 @on_command('条件', only_to_me=False)
 async def jx3_requirement(session):
     name = session.get('name', prompt='你想查询哪个奇遇的条件呢？')
@@ -30,6 +32,7 @@ async def _(session: CommandSession):
     session.state[session.current_key] = stripped_arg
 
 
+# 金价
 @on_command('金价', only_to_me=False)
 async def jx3_gold(session: CommandSession):
     user = session.event.user_id
@@ -50,6 +53,7 @@ async def _(session: CommandSession):
     session.state[session.current_key] = stripped_arg
 
 
+# 沙盘
 @on_command('沙盘', only_to_me=False)
 async def jx3_sand(session: CommandSession):
     user = session.event.user_id
@@ -70,6 +74,7 @@ async def _(session: CommandSession):
     session.state[session.current_key] = stripped_arg
 
 
+# 开服检测
 @on_command('开服', only_to_me=False)
 async def jx3_server(session):
     user = session.event.user_id
@@ -90,12 +95,14 @@ async def _(session: CommandSession):
     session.state[session.current_key] = stripped_arg
 
 
+# 骚话
 @on_command('骚话', only_to_me=False)
 async def jx3_sanhua(session):
     saohua = await get_saohua()
     await session.send(saohua)
 
 
+# 日常查询（美人图默认绝代）
 @on_command('日常', only_to_me=False)
 async def jx3_daily(session):
     user = session.event.user_id
@@ -103,12 +110,14 @@ async def jx3_daily(session):
     await session.send(f'[CQ:at,qq={user}]' + daily_report)
 
 
+# 蹲宠查询（绝代）
 @on_command('蹲宠', only_to_me=False)
 async def jx3_cdpet(session):
     pic = await get_cdpet_pic()
     await session.send(pic)
 
 
+# 定时发送日常
 @scheduler.scheduled_job('cron', hour='8')
 async def jx3_scheduleddaily():
     bot = get_bot()
@@ -117,6 +126,7 @@ async def jx3_scheduleddaily():
         await bot.send_group_msg(group_id=group_num, message=f'今日日常：\n{msg}')
 
 
+# 定时提醒会试
 @scheduler.scheduled_job('cron', day_of_week='sat', hour='20')
 async def exam_begin():
     bot = get_bot()
