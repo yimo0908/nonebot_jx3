@@ -7,9 +7,7 @@ async def get_daily_report():
         try:
             res = await s.get(api)
             dictionary = res.json()['data']
-            msg = (
-                "今天是{DateTime}，周{Week}\n大战：{DayWar}\n矿车：{DayCamp}\n战场：{DayBattle}\n驰援：{DayCommon}\n周常公共：{"
-                "WeekCommon}\n周常小队：{ ""WeekFive}\n周常团队：{WeekTeam}".format(**dictionary))
+            msg = ("今天是{DateTime}，周{Week}\n大战：{DayWar}\n矿车：{DayCamp}\n战场：{DayBattle}\n驰援：{DayCommon}\n周常公共：{WeekCommon}\n周常小队：{WeekFive}\n周常团队：{WeekTeam}".format(**dictionary))
             if "DayDraw" in dictionary.keys():
                 msg += ("\n美人图：{DayDraw}".format(**dictionary))
             return "\n今日日常：\n" + msg
