@@ -7,6 +7,7 @@ from .jx3_requirement import check_requirement
 from .jx3_sand import get_sand_of_server
 from .jx3_saohua import get_saohua
 from .jx3_server import check_server
+from .jx3_price import get_price
 
 # 定时任务的群列表
 group_list = [1003245549]
@@ -115,6 +116,26 @@ async def jx3_daily(session):
 async def jx3_cdpet(session):
     pic = await get_cdpet_pic()
     await session.send(pic)
+
+# 交易行物价查询（绝代）
+@on_command('market', only_to_me=False)
+async def jx3_price(session):
+    user = session.event.user_id
+    name = session.get('name', prompt='你想查询哪个物品的物价呢？')
+    report = await get_price(name)
+    await session.send(f'[CQ:at,qq={user}]' + "\n" + report)
+
+
+@jx3_price.args_parser
+async def _(session: CommandSession):
+    stripped_arg = session.current_arg_text.strip()
+    if session.is_first_run:
+        if stripped_arg:
+            session.state['name'] = stripped_arg
+        return
+    if not stripped_arg:
+        session.pause('要查询名称不能为空呢，请重新输入')
+    session.state[session.current_key] = stripped_arg
 
 
 # 定时发送日常
