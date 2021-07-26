@@ -117,6 +117,7 @@ async def jx3_cdpet(session):
     pic = await get_cdpet_pic()
     await session.send(pic)
 
+
 # 交易行物价查询（绝代）
 @on_command('market', only_to_me=False)
 async def jx3_price(session):
