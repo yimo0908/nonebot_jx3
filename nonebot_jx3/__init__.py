@@ -4,7 +4,6 @@ from .jx3_CDpet import get_cdpet_pic
 from .jx3_daily import get_daily_report
 from .jx3_gold import get_gold_of_server
 from .jx3_requirement import check_requirement
-from .jx3_sand import get_sand_of_server
 from .jx3_saohua import get_saohua
 from .jx3_server import check_server
 from .jx3_price import get_price
@@ -43,27 +42,6 @@ async def jx3_gold(session: CommandSession):
 
 
 @jx3_gold.args_parser
-async def _(session: CommandSession):
-    stripped_arg = session.current_arg_text.strip()
-    if session.is_first_run:
-        if stripped_arg:
-            session.state['server'] = stripped_arg
-        return
-    if not stripped_arg:
-        session.pause('要查询服务器名称不能为空呢，请重新输入')
-    session.state[session.current_key] = stripped_arg
-
-
-# 沙盘
-@on_command('沙盘', only_to_me=False)
-async def jx3_sand(session: CommandSession):
-    user = session.event.user_id
-    server = session.get('server', prompt='你想查询哪个服务器的沙盘呢？')
-    report = await get_sand_of_server(server)
-    await session.send(f'[CQ:at,qq={user}]' + "\n" + report)
-
-
-@jx3_sand.args_parser
 async def _(session: CommandSession):
     stripped_arg = session.current_arg_text.strip()
     if session.is_first_run:
@@ -145,7 +123,10 @@ async def jx3_scheduleddaily():
     bot = get_bot()
     msg = await get_daily_report()
     for group_num in group_list:
-        await bot.send_group_msg(group_id=group_num, message=f'今日日常：\n{msg}')
+        try:
+            await bot.send_group_msg(group_id=group_num, message=f'今日日常：\n{msg}')
+        except aiocqhttp.ActionFailed:
+            logger.error(f"发送群消息'{group_num}'有问题惹！")
 
 
 # 定时提醒会试
@@ -153,11 +134,17 @@ async def jx3_scheduleddaily():
 async def exam_begin():
     bot = get_bot()
     for group_num in group_list:
-        await bot.send_group_msg(group_id=group_num, message="科举开始了，记得科举哦\n科举查题器：https://j3cx.com/exam")
+        try:
+            await bot.send_group_msg(group_id=group_num, message="科举开始了，记得科举哦\n科举查题器：https://j3cx.com/exam")
+        except aiocqhttp.ActionFailed:
+            logger.error(f"发送群消息'{group_num}'有问题惹！")
 
 
 @scheduler.scheduled_job('cron', day_of_week='sun', hour='23', minute='30')
 async def exam_end():
     bot = get_bot()
     for group_num in group_list:
-        await bot.send_group_msg(group_id=group_num, message="科举还有半个小时结束，记得科举哦\n科举查题器：https://j3cx.com/exam")
+        try:
+            await bot.send_group_msg(group_id=group_num, message="科举还有半个小时结束，记得科举哦\n科举查题器：https://j3cx.com/exam")
+        except aiocqhttp.ActionFailed:
+            logger.error(f"发送群消息'{group_num}'有问题惹！")
