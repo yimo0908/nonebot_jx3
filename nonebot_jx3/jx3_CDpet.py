@@ -6,8 +6,8 @@ from io import BytesIO
 import base64
 
 
-async def get_pet_time(name):
-    api = 'https://next.jx3box.com/api/serendipity?server=绝代天骄&role=&serendipity=' + \
+async def get_pet_time(server, name):
+    api = 'https://next.jx3box.com/api/serendipity?server=' + server + '&role=&serendipity=' + \
           name + '&start=0&pageIndex=1&pageSize=1'
     async with httpx.AsyncClient() as s:
         res = await s.get(api)
@@ -24,20 +24,21 @@ async def get_pet_time(name):
             if _time.days:
                 def plural(n):
                     return n, abs(n) != 1 and "s" or ""
+
                 s = ("%d d%s  " % plural(_time.days)) + s
             one_subject = "%s              上个CD：%s前" % (subject["serendipity"], s)
     return one_subject
 
 
-async def get_cdpet_pic():
+async def get_cdpet_pic(server):
     who = ["稻稻", "蟹仔", "蟹兵", "蟹卒", "蟹将", "蟹帅", "小灰", "小锦", "白鹅", "蟹相", "蟹象", "阿里", "阿飞",
            "蟹仕", "蟹士", "蟹炮", "蟹砲", "哈皮", "嘟嘟", "静静", "大头鹅", "蟹车·红", "蟹车·蓝", "蟹马·红", "蟹马·蓝"]
-    title = "绝代天骄的蹲宠CD如下：\n"
+    title = f"{server}的蹲宠CD如下：\n"
     end = "\n统计时间：" + strftime("%Y-%m-%d %H:%M:%S",
                                localtime()) + "\n数据来源：茗伊插件集\nhttps://j3cx.com/serendipity"
     sendmsg = ""
     for name in who:
-        sendmsg += await get_pet_time(name) + "\n"
+        sendmsg += await get_pet_time(server, name) + "\n"
     msg = title + sendmsg + end
     img = Image.new('RGB', (700, 1100), (255, 255, 255))
     font_path = "font.ttc"

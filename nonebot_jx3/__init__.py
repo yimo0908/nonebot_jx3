@@ -81,7 +81,7 @@ async def jx3_sanhua(session):
     await session.send(saohua)
 
 
-# 日常查询（美人图默认绝代）
+# 日常查询
 @on_command('日常', only_to_me=False)
 async def jx3_daily(session):
     user = session.event.user_id
@@ -89,11 +89,24 @@ async def jx3_daily(session):
     await session.send(f'[CQ:at,qq={user}]' + daily_report)
 
 
-# 蹲宠查询（绝代）
+# 蹲宠查询
 @on_command('蹲宠', only_to_me=False)
-async def jx3_cdpet(session):
-    pic = await get_cdpet_pic()
+async def jx3_CDpet(session):
+    server = session.get('server', prompt='你想查询哪个服务器的蹲宠呢？')
+    pic = await get_cdpet_pic(server)
     await session.send(pic)
+
+
+@jx3_CDpet.args_parser
+async def _(session: CommandSession):
+    stripped_arg = session.current_arg_text.strip()
+    if session.is_first_run:
+        if stripped_arg:
+            session.state['server'] = stripped_arg
+        return
+    if not stripped_arg:
+        session.pause('要查询服务器名称不能为空呢，请重新输入')
+    session.state[session.current_key] = stripped_arg
 
 
 # 交易行物价查询（绝代）
