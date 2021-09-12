@@ -124,7 +124,7 @@ async def jx3_scheduleddaily():
     msg = await get_daily_report()
     for group_num in group_list:
         try:
-            await bot.send_group_msg(group_id=group_num, message=f'今日日常：\n{msg}')
+            await bot.send_group_msg(group_id=group_num, message=msg)
         except aiocqhttp.ActionFailed:
             logger.error(f"发送群消息'{group_num}'有问题惹！")
 
